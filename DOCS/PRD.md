@@ -73,29 +73,6 @@ this allows users to track stocks with Al-enhanced insights.
 - The UI should be accessible (keyboard navigation, screen reader support), styled for dark mode, and handle empty states gracefully (e.g., "No stocks in your watchlist yet").
 - In the future, consider adding server-side/user account support for syncing the watchlist across devices.
 
----
-
-## Additional Notes
-The app should have the following features:
-2. Price Chart:
-Display an interactive price chart for the selected stock
-Show at least the last 30 days of price data
-3. AI Company Summary
-* Include basic info: current price, dollar change, and percentage change
-Generate a 3-4 sentence AI summary explaining what the company does
-Include their main products/services and market position
-Display this in a clean card below the chart
-4. Sentiment Analysis
-* Create a sentiment indicator showing market sentiment (Bearish, Neutral, or Bullish)
-* Display as a visual meter or gauge
-Include a brief explanation of why the sentiment is what it is
-5. Watch list
-. Allow users to add stocks to a watchlist
-. Display the watchlist showing ticker symbols and current prices
-Persist the watchlist in browser storage
-Technical Requirements:
-* Make it a single-page application
-
 ## Technical Requirements
 - Use Next.js (App Router) and React for the frontend framework.
 - Use TypeScript for type safety throughout the codebase.
