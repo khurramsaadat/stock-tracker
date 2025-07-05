@@ -11,8 +11,13 @@ import {
 
 ChartJS.register(LineElement, CategoryScale, LinearScale, PointElement, Tooltip, Legend);
 
+interface HistoryEntry {
+  date: string;
+  close: number;
+}
+
 interface StockChartProps {
-  history: any[];
+  history: HistoryEntry[];
   loading?: boolean;
   error?: string | null;
 }

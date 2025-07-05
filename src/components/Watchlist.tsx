@@ -14,7 +14,12 @@ interface StockData {
 
 const WATCHLIST_KEY = 'stockTrackerWatchlist';
 
-export default function Watchlist({ onSelect }: WatchlistProps) {
+// Attach addSymbol as a static method to the Watchlist component
+interface WatchlistComponent extends React.FC<WatchlistProps> {
+  addSymbol?: (symbol: string) => void;
+}
+
+const WatchlistComp: WatchlistComponent = function Watchlist({ onSelect }: WatchlistProps) {
   const [symbols, setSymbols] = useState<string[]>([]);
   const [stocks, setStocks] = useState<Record<string, StockData>>({});
 
@@ -74,7 +79,7 @@ export default function Watchlist({ onSelect }: WatchlistProps) {
   };
 
   // Add symbol to watchlist (exported for parent usage)
-  Watchlist.addSymbol = (symbol: string) => {
+  WatchlistComp.addSymbol = (symbol: string) => {
     symbol = symbol.toUpperCase();
     setSymbols(prev => {
       if (prev.includes(symbol)) return prev;
@@ -151,7 +156,6 @@ export default function Watchlist({ onSelect }: WatchlistProps) {
       )}
     </div>
   );
-}
+};
 
-// Static method for parent to add symbol
-Watchlist.addSymbol = (symbol: string) => {}; 
+export default WatchlistComp; 

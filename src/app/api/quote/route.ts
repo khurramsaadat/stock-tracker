@@ -50,7 +50,7 @@ export async function GET(req: NextRequest) {
       prevClose: data.pc,
       history,
     });
-  } catch (err) {
+  } catch {
     return NextResponse.json({ error: 'Stock not found or API error.' }, { status: 404 });
   }
 } 

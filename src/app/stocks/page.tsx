@@ -9,7 +9,17 @@ import Watchlist from "../../components/Watchlist";
 export default function StocksPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [stock, setStock] = useState<any>(null);
+  const [stock, setStock] = useState<{
+    symbol: string;
+    price: number;
+    change: number;
+    changePercent: number;
+    high: number;
+    low: number;
+    open: number;
+    prevClose: number;
+    history?: { date: string; close: number }[];
+  } | null>(null);
   const [chartLoading, setChartLoading] = useState(false);
   const [chartError, setChartError] = useState<string | null>(null);
   const searchParams = useSearchParams();
@@ -28,7 +38,7 @@ export default function StocksPage() {
       if (!data.history || data.history.length === 0) {
         setChartError("No historical data available for this symbol.");
       }
-    } catch (err: any) {
+    } catch {
       setError("Stock not found or API error.");
       setChartError("Unable to load chart data.");
     } finally {
@@ -43,7 +53,6 @@ export default function StocksPage() {
     if (symbol) {
       handleSearch(symbol);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
 
   return (
@@ -84,7 +93,11 @@ export default function StocksPage() {
                 </div>
                 <button
                   className="mt-4 px-4 py-2 bg-blue-400 text-white rounded-lg font-semibold shadow hover:bg-blue-500 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400"
-                  onClick={() => Watchlist.addSymbol(stock.symbol)}
+                  onClick={() => {
+                    if (typeof Watchlist.addSymbol === 'function') {
+                      Watchlist.addSymbol(stock.symbol);
+                    }
+                  }}
                   aria-label={`Add ${stock.symbol} to watchlist`}
                 >
                   Add to Watchlist
