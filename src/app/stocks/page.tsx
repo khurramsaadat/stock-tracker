@@ -1,4 +1,5 @@
 "use client";
+import { Suspense } from "react";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 import StockChart from "../../components/StockChart";
@@ -6,7 +7,7 @@ import CompanySummary from "../../components/CompanySummary";
 import SentimentMeter from "../../components/SentimentMeter";
 import Watchlist from "../../components/Watchlist";
 
-export default function StocksPage() {
+function StocksPageInner() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [stock, setStock] = useState<{
@@ -120,5 +121,13 @@ export default function StocksPage() {
         </div>
       </div>
     </section>
+  );
+}
+
+export default function StocksPage() {
+  return (
+    <Suspense fallback={<div className="text-white/80">Loading...</div>}>
+      <StocksPageInner />
+    </Suspense>
   );
 } 
