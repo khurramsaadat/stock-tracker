@@ -1,11 +1,29 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+interface StockHistoryEntry {
+  date: string;
+  close: number;
+}
+
+interface StockQuote {
+  symbol: string;
+  price: number;
+  change: number;
+  changePercent: number;
+  high: number;
+  low: number;
+  open: number;
+  prevClose: number;
+  history?: StockHistoryEntry[];
+  // Add more fields as needed
+}
+
 // In-memory cache (symbol -> { data, timestamp })
-const cache: Record<string, { data: any; timestamp: number }> = {};
+const cache: Record<string, { data: StockQuote; timestamp: number }> = {};
 const CACHE_TTL = 60 * 1000; // 1 minute
 
 // Mock data for fallback (add all Most Actives tickers)
-const mockData: Record<string, any> = {
+const mockData: Record<string, StockQuote> = {
   TSLA: {
     symbol: 'TSLA', price: 315.35, change: -0.30, changePercent: -0.10, high: 318.45, low: 312.76, open: 317.95, prevClose: 315.65,
     history: [
@@ -46,7 +64,7 @@ export async function GET(req: NextRequest) {
     const res = await fetch(url);
     const data = await res.json();
     if (!data.c) throw new Error('No data from Finnhub');
-    let history = null;
+    let history: StockHistoryEntry[] | undefined = undefined;
     if (withHistory) {
       // Try Alpha Vantage for history
       const avUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${upperSymbol}&apikey=${alphaKey}`;
@@ -84,7 +102,7 @@ export async function GET(req: NextRequest) {
       const avData = await avRes.json();
       const q = avData['Global Quote'];
       if (q && q['05. price']) {
-        let history = null;
+        let history: StockHistoryEntry[] | undefined = undefined;
         if (withHistory) {
           const histUrl = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${upperSymbol}&apikey=${alphaKey}`;
           const histRes = await fetch(histUrl);

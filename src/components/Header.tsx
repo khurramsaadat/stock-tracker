@@ -1,7 +1,6 @@
 "use client";
 import Link from 'next/link';
 import { FaChartLine, FaBars, FaTimes, FaChevronDown } from 'react-icons/fa';
-import StockSearch from './StockSearch';
 import { useRouter } from 'next/navigation';
 import { useState, useRef, useEffect } from 'react';
 
@@ -70,16 +69,6 @@ export default function Header() {
       document.removeEventListener('keydown', handle);
     };
   }, []);
-
-  // Handle hover for desktop Markets menu
-  const handleMarketsMouseEnter = () => setMarketsOpen(true);
-  const handleMarketsMouseLeave = () => setMarketsOpen(false);
-
-  const handleSearch = (symbol: string) => {
-    if (symbol && symbol.trim()) {
-      router.push(`/stocks?symbol=${encodeURIComponent(symbol.trim().toUpperCase())}`);
-    }
-  };
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-black border-b border-card shadow-sm">

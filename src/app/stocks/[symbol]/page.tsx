@@ -1,11 +1,47 @@
 "use client";
 import React, { useState, use, useEffect } from "react";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 import StockChart from "@/components/StockChart";
 
+interface StockHistoryEntry {
+  date: string;
+  close: number;
+}
+
+interface StockDetail {
+  symbol: string;
+  name: string;
+  price: number;
+  change: number;
+  changePct: number;
+  afterHours?: number;
+  afterHoursChange?: number;
+  afterHoursChangePct?: number;
+  prevClose?: number;
+  open?: number;
+  bid?: string;
+  ask?: string;
+  dayRange?: string;
+  wkRange?: string;
+  volume?: string;
+  avgVolume?: string;
+  marketCap?: string;
+  pe?: string;
+  beta?: string;
+  eps?: string;
+  earnings?: string;
+  sector?: string;
+  wkChange?: number;
+  target?: number;
+  exchange?: string;
+  currency?: string;
+  atClose?: string;
+  afterHoursTime?: string;
+  history?: StockHistoryEntry[];
+}
+
 // Mock data for fallback (add all Most Actives tickers)
-const mockData: Record<string, any> = {
+const mockData: Record<string, StockDetail> = {
   TSLA: {
     symbol: 'TSLA', name: "Tesla, Inc.", price: 315.35, change: -0.30, changePct: -0.10, afterHours: 312.67, afterHoursChange: -2.68, afterHoursChangePct: -0.85, prevClose: 315.65, open: 317.95, bid: "314.96 x 100", ask: "315.44 x 100", dayRange: "312.76 - 318.45", wkRange: "182.00 - 488.54", volume: "58,042,302", avgVolume: "118,500,386", marketCap: "1.016T", pe: "182.28", beta: "2.46", eps: "1.73", earnings: "Jul 21, 2025 - Jul 25, 2025", sector: "Auto Manufacturers / Consumer Cyclical", wkChange: 24.67, target: 306.07, exchange: "NasdaqGS", currency: "USD", atClose: "July 3 at 1:00:00 PM EDT", afterHoursTime: "July 3 at 4:59:58 PM EDT", history: [ { date: '2024-07-01', close: 314.00 }, { date: '2024-07-02', close: 316.00 }, { date: '2024-07-03', close: 315.35 }, ], },
   NVDA: {
@@ -15,7 +51,7 @@ const mockData: Record<string, any> = {
 
 export default function StockDetailPage({ params }: { params: Promise<{ symbol: string }> }) {
   const { symbol } = use(params);
-  const [stock, setStock] = useState<any | null>(null);
+  const [stock, setStock] = useState<StockDetail | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [isFollowing, setIsFollowing] = useState(false);
@@ -40,7 +76,7 @@ export default function StockDetailPage({ params }: { params: Promise<{ symbol: 
             setStock(null);
           }
         } else {
-          setStock({ ...data, name: mockData[symbol.toUpperCase()]?.name || symbol, ...mockData[symbol.toUpperCase()] });
+          setStock({ ...data, ...mockData[symbol.toUpperCase()] });
         }
       })
       .catch(() => {
@@ -60,7 +96,7 @@ export default function StockDetailPage({ params }: { params: Promise<{ symbol: 
   }, [symbol]);
 
   // Helper to filter history by range
-  function filterHistory(history: any[], range: string) {
+  function filterHistory(history: StockHistoryEntry[] = [], range: string) {
     if (!history) return [];
     const now = new Date();
     let cutoff: Date;
@@ -133,9 +169,9 @@ export default function StockDetailPage({ params }: { params: Promise<{ symbol: 
             <div className="flex items-end gap-2">
               <span className="text-2xl font-bold text-white">{stock.afterHours?.toFixed(2) ?? "--"}</span>
               <span className={
-                (stock.afterHoursChange > 0 ? "text-green-400" : stock.afterHoursChange < 0 ? "text-red-400" : "text-white/80") + " text-lg font-semibold"
+                (stock.afterHoursChange && stock.afterHoursChange > 0 ? "text-green-400" : stock.afterHoursChange && stock.afterHoursChange < 0 ? "text-red-400" : "text-white/80") + " text-lg font-semibold"
               }>
-                {stock.afterHoursChange > 0 ? "+" : ""}{stock.afterHoursChange} ({stock.afterHoursChangePct > 0 ? "+" : ""}{stock.afterHoursChangePct}%)
+                {stock.afterHoursChange && stock.afterHoursChange > 0 ? "+" : ""}{stock.afterHoursChange ?? "--"} ({stock.afterHoursChangePct && stock.afterHoursChangePct > 0 ? "+" : ""}{stock.afterHoursChangePct ?? "--"}%)
               </span>
             </div>
             <div className="text-[11px] text-white/60">After hours: {stock.afterHoursTime || "--"}</div>
@@ -153,7 +189,7 @@ export default function StockDetailPage({ params }: { params: Promise<{ symbol: 
                 className={`px-2 py-1 rounded text-xs font-semibold border border-neutral-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-400 ${range === r ? 'bg-blue-400 text-white border-blue-400' : 'bg-neutral-900 text-white hover:bg-neutral-800'}`}
                 onClick={() => {
                   setChartLoading(true);
-                  setRange(r as any);
+                  setRange(r as '1M' | '3M' | '1Y' | 'ALL');
                   setTimeout(() => setChartLoading(false), 300); // Simulate loading
                 }}
                 aria-pressed={range === r}
@@ -185,7 +221,7 @@ export default function StockDetailPage({ params }: { params: Promise<{ symbol: 
         <div><span className="text-white/80">Earnings Date:</span> <span className="text-white font-semibold">{stock.earnings ?? "--"}</span></div>
         <div><span className="text-white/80">1y Target Est:</span> <span className="text-white font-semibold">{stock.target ?? "--"}</span></div>
         <div><span className="text-white/80">Sector:</span> <span className="text-white font-semibold">{stock.sector ?? "--"}</span></div>
-        <div><span className="text-white/80">52 Wk Change %:</span> <span className={stock.wkChange > 0 ? "text-green-400 font-semibold" : stock.wkChange < 0 ? "text-red-400 font-semibold" : "text-white font-semibold"}>{stock.wkChange > 0 ? "+" : ""}{stock.wkChange ?? "--"}%</span></div>
+        <div><span className="text-white/80">52 Wk Change %:</span> <span className={stock.wkChange && stock.wkChange > 0 ? "text-green-400 font-semibold" : stock.wkChange && stock.wkChange < 0 ? "text-red-400 font-semibold" : "text-white font-semibold"}>{stock.wkChange && stock.wkChange > 0 ? "+" : ""}{stock.wkChange ?? "--"}%</span></div>
       </div>
     </div>
   );
