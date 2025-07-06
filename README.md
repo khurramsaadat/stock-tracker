@@ -9,6 +9,7 @@ A modern, AI-powered stock tracker web app built with Next.js, React, and Tailwi
 - AI-generated company summary (using free AI/NLP APIs)
 - Sentiment analysis (rule-based, with future AI/NLP integration)
 - Add/remove stocks to a personal watchlist (localStorage persistence)
+  - Watchlist now includes hydration flag for SSR/CSR consistency, a 'Load Defaults' button (restores TSLA, AAPL, NVDA, MSFT), and improved empty state UI.
 - Responsive, accessible, and dark mode UI
 
 ## Tech Stack

@@ -51,6 +51,12 @@ alwaysApply: true
   - Get confirmation before implementing fixes.
 - When adding new code, ensure it doesn't introduce new problems
 
+address the ESLint errors:
+`'e' is defined but never used`.
+error related to escaping characters.
+`'router' is assigned a value but never used`.
+
+
 - use pexels.com to get free images when needed.
 - use react icons 
 

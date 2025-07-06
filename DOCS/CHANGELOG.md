@@ -40,6 +40,11 @@
 - Fixed TypeScript error in layout (src/app/layout.tsx): removed unused stockSearch prop.
 - Ran full type check: `npx tsc --noEmit` (no errors).
 - Directory and file structure up to date (see below).
+- Improved Watchlist (src/components/Watchlist.tsx):
+  - Added hydration flag to prevent SSR/CSR mismatch and empty flashes.
+  - Added "Load Defaults" button (visible only when watchlist is empty) to restore default stocks.
+  - Added small, muted text under button: "Defaults: TSLA, AAPL, NVDA, MSFT" for user clarity.
+  - Button and info styled for modern, accessible dark UI.
 
 ### Directory Structure (2025-07-05)
 - DOCS/

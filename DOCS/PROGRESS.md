@@ -22,4 +22,9 @@
 - Added clear ("X") icon to StockSearch, improved accessibility and styling.
 - Fixed TypeScript error in layout by removing unused stockSearch prop.
 - Ran full type check: no errors found.
-- Updated documentation and directory structure. 
+- Updated documentation and directory structure.
+- Improved Watchlist component:
+  - Added hydration flag to prevent SSR/CSR mismatch and empty flashes.
+  - Added "Load Defaults" button (visible only when watchlist is empty) to restore default stocks.
+  - Added small, muted text under button: "Defaults: TSLA, AAPL, NVDA, MSFT" for user clarity.
+  - Button and info styled for modern, accessible dark UI. 

@@ -19,20 +19,26 @@ interface WatchlistComponent extends React.FC<WatchlistProps> {
   addSymbol?: (symbol: string) => void;
 }
 
+const DEFAULT_WATCHLIST = ["TSLA", "AAPL", "NVDA", "MSFT"];
+
 const WatchlistComp: WatchlistComponent = function Watchlist({ onSelect }: WatchlistProps) {
   const [symbols, setSymbols] = useState<string[]>([]);
   const [stocks, setStocks] = useState<Record<string, StockData>>({});
+  // Hydration flag to avoid SSR/CSR mismatch
+  const [hydrated, setHydrated] = useState(false);
 
-  // Load watchlist from localStorage
+  // On mount, load from localStorage or preload default
   useEffect(() => {
-    const saved = localStorage.getItem(WATCHLIST_KEY);
-    if (saved) {
-      try {
-        setSymbols(JSON.parse(saved));
-      } catch {
-        setSymbols([]);
-      }
+    const stored = localStorage.getItem(WATCHLIST_KEY);
+    if (stored) {
+      const parsed = JSON.parse(stored);
+      // If stored is empty array, keep as empty (user cleared list)
+      setSymbols(Array.isArray(parsed) ? parsed : []);
+    } else {
+      setSymbols(DEFAULT_WATCHLIST);
+      localStorage.setItem(WATCHLIST_KEY, JSON.stringify(DEFAULT_WATCHLIST));
     }
+    setHydrated(true);
   }, []);
 
   // Fetch current price for each symbol
@@ -89,11 +95,31 @@ const WatchlistComp: WatchlistComponent = function Watchlist({ onSelect }: Watch
     });
   };
 
+  // Reset watchlist to default stocks
+  const resetWatchlist = () => {
+    setSymbols(DEFAULT_WATCHLIST);
+    localStorage.setItem(WATCHLIST_KEY, JSON.stringify(DEFAULT_WATCHLIST));
+  };
+
   return (
     <div className="bg-neutral-900 rounded-lg p-6 mt-6 shadow max-w-md mx-auto" aria-label="Watchlist" role="region">
       <h3 className="text-xl font-bold text-blue-300 mb-4">Watchlist</h3>
-      {symbols.length === 0 ? (
-        <div className="text-white/60 text-center">No stocks in your watchlist yet.</div>
+      {!hydrated ? (
+        <div className="text-white/60 text-center">Loading…</div>
+      ) : symbols.length === 0 ? (
+        <div className="flex flex-col items-center gap-4">
+          <div className="text-white/60 text-center">No stocks in your watchlist yet.</div>
+          <button
+            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded shadow focus:outline-none focus:ring-2 focus:ring-blue-400"
+            onClick={resetWatchlist}
+            aria-label="Load default stocks into watchlist"
+          >
+            Load Defaults
+          </button>
+          <span className="text-xs text-white/40 mt-1 text-center">
+            Defaults: <span className="tracking-wider font-mono">TSLA, AAPL, NVDA, MSFT</span>
+          </span>
+        </div>
       ) : (
         <ul className="divide-y divide-neutral-800">
           {symbols.map(symbol => {

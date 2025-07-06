@@ -12,5 +12,6 @@
 - 2025-07-05T[HH:MM] User provided detailed header and navigation requirements (logo, nav links, search bar, hamburger menu, accessibility, mobile behavior).
 - 2025-07-05T[HH:MM] User confirmed use of "X" icon for clear button in search bar.
 - 2025-07-05T[HH:MM] User reviewed changes, said "good job", and requested save. 
+- 2025-07-05T[HH:MM] User requested Watchlist improvements: hydration flag, Load Defaults button, show default stocks info, and to save changes.
 
 https://finance.yahoo.com/markets/stocks/most-active/
