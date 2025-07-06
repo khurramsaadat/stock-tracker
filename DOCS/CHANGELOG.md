@@ -15,6 +15,12 @@
 - Memorized best practice: always escape apostrophes in JSX visible text (e.g., Day's Range → Day&apos;s Range) to comply with react/no-unescaped-entities.
 - Updated README.md with current dependency and package versions from npm list/package.json.
 - Saved all changes and documentation improvements.
+- Updated footer GitHub link to github.com
+- Added 'StockTracker' text next to header logo
+- Saved all changes
+- Moved Stock Tracker title above search bar on stocks page
+- Improved home page background logo opacity (now 5%)
+- Saved all changes
 
 ## 2024-07-04
 - Completed Stock Search feature as per PRD.md:

@@ -11,6 +11,10 @@
 - Markets dropdown: all links except 'Stocks: Most Actives' are greyed out/disabled. Only 'Most Actives' is enabled.
 - Memorized JSX apostrophe escape best practice for future projects.
 - Updated README.md dependencies and package versions.
+- Updated footer GitHub link to github.com
+- Added 'StockTracker' text next to header logo
+- Moved Stock Tracker title above search bar on stocks page
+- Improved home page background logo opacity (now 5%)
 - Saved all changes
 
 ## 2025-07-05

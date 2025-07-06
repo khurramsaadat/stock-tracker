@@ -4,7 +4,6 @@ import { FaChartLine, FaBars, FaTimes, FaChevronDown } from 'react-icons/fa';
 import { useState, useRef, useEffect } from 'react';
 
 const navLinks = [
-  { href: '/', label: 'Home' },
   { href: '/stocks', label: 'Stock Tracker' },
   { href: '/about', label: 'About' },
 ];
@@ -73,8 +72,9 @@ export default function Header() {
       <nav className="container mx-auto flex items-center justify-between py-4 px-4 relative">
         {/* Left: Logo only */}
         <div className="flex items-center min-w-0">
-          <Link href="/" className="flex items-center text-blue-400 text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-blue-400 rounded transition-colors hover:text-blue-300" aria-label="Go to home page">
+          <Link href="/" className="flex items-center gap-2 text-blue-400 text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-blue-400 rounded transition-colors hover:text-blue-300" aria-label="Go to home page">
             <FaChartLine className="text-3xl" />
+            <span className="text-base font-bold text-white tracking-tight ml-1">StockTracker</span>
           </Link>
         </div>
         {/* Right: Navigation links */}

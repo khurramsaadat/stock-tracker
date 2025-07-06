@@ -67,8 +67,5 @@ A modern, AI-powered stock tracker web app built with Next.js, React, and Tailwi
    ```sh
    npm run dev
    ```
-5. **Open the app:**
-   - Visit [http://localhost:3000](http://localhost:3000) in your browser.
-
 ## License
 This project is for educational and demonstration purposes. See LICENSE file for details.

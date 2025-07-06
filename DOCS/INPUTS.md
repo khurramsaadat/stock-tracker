@@ -5,6 +5,8 @@
 - 2024-07-04  User: reduce the vertical height of chart to half; update readme.md; save
 - 2024-07-04  User: grey out all Markets links except Most Actives; save
 - 2024-07-04  User: memorise JSX apostrophe escape fix; update dependencies in readme.md; save
+- 2024-07-04  User: replace github link with github.com in footer; add StockTracker next to header logo; save
+- 2024-07-04  User: move Stock Tracker title above search bar; improve home page background logo opacity; save
 
 ## 2025-07-05
 - 2025-07-05T[HH:MM] User provided detailed header and navigation requirements (logo, nav links, search bar, hamburger menu, accessibility, mobile behavior).

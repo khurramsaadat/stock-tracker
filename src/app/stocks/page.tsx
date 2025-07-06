@@ -59,6 +59,7 @@ function StocksPageInner() {
 
   return (
     <section className="container mx-auto py-16">
+      <h1 className="text-3xl font-bold text-blue-400 mb-6 text-center">Stock Tracker</h1>
       <div className="mb-6 max-w-xl mx-auto">
         <StockSearch onSearch={handleSearch} />
       </div>
@@ -69,7 +70,6 @@ function StocksPageInner() {
         </aside>
         {/* Main content */}
         <div className="flex-1 text-center">
-          <h1 className="text-3xl font-bold text-blue-400 mb-4">Stock Tracker</h1>
           {loading && <p className="text-white/80">Loading...</p>}
           {error && <p className="text-red-400">{error}</p>}
           {stock && (
