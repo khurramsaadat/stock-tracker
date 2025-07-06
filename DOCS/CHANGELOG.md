@@ -12,6 +12,9 @@
 - Updated README.md to reflect new chart features and UI improvements
 - All changes tested and verified in compact layout
 - All Markets dropdown links except 'Stocks: Most Actives' are now greyed out/disabled in both desktop and mobile menus. Only 'Most Actives' is enabled.
+- Memorized best practice: always escape apostrophes in JSX visible text (e.g., Day's Range → Day&apos;s Range) to comply with react/no-unescaped-entities.
+- Updated README.md with current dependency and package versions from npm list/package.json.
+- Saved all changes and documentation improvements.
 
 ## 2024-07-04
 - Completed Stock Search feature as per PRD.md:

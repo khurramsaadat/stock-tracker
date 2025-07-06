@@ -1,7 +1,6 @@
 "use client";
 import Link from 'next/link';
 import { FaChartLine, FaBars, FaTimes, FaChevronDown } from 'react-icons/fa';
-import { useRouter } from 'next/navigation';
 import { useState, useRef, useEffect } from 'react';
 
 const navLinks = [
@@ -42,7 +41,6 @@ const marketsLinks = [
 const enabledMarkets = ['/markets/most-actives']; // Only this link is enabled for now
 
 export default function Header() {
-  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const [marketsOpen, setMarketsOpen] = useState(false);
   const [marketsMobileOpen, setMarketsMobileOpen] = useState(false);

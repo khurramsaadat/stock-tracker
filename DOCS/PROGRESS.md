@@ -9,7 +9,9 @@
 - Added range selector buttons (1M, 3M, 1Y, All) to stock chart
 - Updated README.md and CHANGELOG.md
 - Markets dropdown: all links except 'Stocks: Most Actives' are greyed out/disabled. Only 'Most Actives' is enabled.
-- Saved changes
+- Memorized JSX apostrophe escape best practice for future projects.
+- Updated README.md dependencies and package versions.
+- Saved all changes
 
 ## 2025-07-05
 - Refactored Header for improved navigation, search, and mobile experience.

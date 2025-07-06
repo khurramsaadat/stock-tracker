@@ -94,7 +94,7 @@ export async function GET(req: NextRequest) {
     };
     cache[cacheKey] = { data: result, timestamp: Date.now() };
     return NextResponse.json(result);
-  } catch (e) {
+  } catch {
     // Try Alpha Vantage for quote as fallback
     try {
       const avUrl = `https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${upperSymbol}&apikey=${alphaKey}`;

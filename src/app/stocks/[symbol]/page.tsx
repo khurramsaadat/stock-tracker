@@ -149,7 +149,7 @@ export default function StockDetailPage({ params }: { params: Promise<{ symbol: 
             onClick={() => setHasHoldings(h => !h)}
             aria-pressed={hasHoldings}
           >
-            + {hasHoldings ? 'In Holdings' : 'Add holdings'}
+            {hasHoldings ? "+ In Holdings" : "+ Add holdings"}
           </button>
         </div>
         <hr className="border-neutral-800 mb-2" />
@@ -210,7 +210,7 @@ export default function StockDetailPage({ params }: { params: Promise<{ symbol: 
         <div><span className="text-white/80">Open:</span> <span className="text-white font-semibold">{stock.open ?? "--"}</span></div>
         <div><span className="text-white/80">Bid:</span> <span className="text-white font-semibold">{stock.bid ?? "--"}</span></div>
         <div><span className="text-white/80">Ask:</span> <span className="text-white font-semibold">{stock.ask ?? "--"}</span></div>
-        <div><span className="text-white/80">Day's Range:</span> <span className="text-white font-semibold">{stock.dayRange ?? "--"}</span></div>
+        <div><span className="text-white/80">Day&apos;s Range:</span> <span className="text-white font-semibold">{stock.dayRange ?? "--"}</span></div>
         <div><span className="text-white/80">52 Week Range:</span> <span className="text-white font-semibold">{stock.wkRange ?? "--"}</span></div>
         <div><span className="text-white/80">Volume:</span> <span className="text-white font-semibold">{stock.volume ?? "--"}</span></div>
         <div><span className="text-white/80">Avg. Volume:</span> <span className="text-white font-semibold">{stock.avgVolume ?? "--"}</span></div>
