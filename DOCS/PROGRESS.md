@@ -4,7 +4,12 @@
 - Price Chart and Company Summary features completed as per PRD.md
 - Integrated Alpha Vantage for historical data
 - All requirements for these sections met; ready for next PRD feature
-- Repo ready for push to GitHub 
+- Repo ready for push to GitHub
+- Reduced chart height to 150px (compact)
+- Added range selector buttons (1M, 3M, 1Y, All) to stock chart
+- Updated README.md and CHANGELOG.md
+- Markets dropdown: all links except 'Stocks: Most Actives' are greyed out/disabled. Only 'Most Actives' is enabled.
+- Saved changes
 
 ## 2025-07-05
 - Refactored Header for improved navigation, search, and mobile experience.

@@ -5,7 +5,7 @@ A modern, AI-powered stock tracker web app built with Next.js, React, and Tailwi
 
 ## Features
 - Search for stocks by ticker symbol
-- View real-time price and 30-day price chart
+- View real-time price and interactive price chart with range selector (1M, 3M, 1Y, All)
 - AI-generated company summary (using free AI/NLP APIs)
 - Sentiment analysis (rule-based, with future AI/NLP integration)
 - Add/remove stocks to a personal watchlist (localStorage persistence)

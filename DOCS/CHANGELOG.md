@@ -6,6 +6,12 @@
 - Added Company Summary feature using Wikipedia extraction (src/components/CompanySummary.tsx, src/app/stocks/page.tsx)
 - Updated README.md with tech stack and usage
 - All features and documentation are ready for push to https://github.com/khurramsaadat/stock-tracker.git
+- Reduced vertical height of the stock chart to 150px (compact view)
+- Added chart range selector buttons (1M, 3M, 1Y, All) above the chart on the stock details page
+- Chart now shows a loading spinner when switching ranges
+- Updated README.md to reflect new chart features and UI improvements
+- All changes tested and verified in compact layout
+- All Markets dropdown links except 'Stocks: Most Actives' are now greyed out/disabled in both desktop and mobile menus. Only 'Most Actives' is enabled.
 
 ## 2024-07-04
 - Completed Stock Search feature as per PRD.md:

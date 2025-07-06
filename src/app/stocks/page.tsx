@@ -6,6 +6,7 @@ import StockChart from "../../components/StockChart";
 import CompanySummary from "../../components/CompanySummary";
 import SentimentMeter from "../../components/SentimentMeter";
 import Watchlist from "../../components/Watchlist";
+import StockSearch from "../../components/StockSearch";
 
 function StocksPageInner() {
   const [loading, setLoading] = useState(false);
@@ -58,6 +59,9 @@ function StocksPageInner() {
 
   return (
     <section className="container mx-auto py-16">
+      <div className="mb-6 max-w-xl mx-auto">
+        <StockSearch onSearch={handleSearch} />
+      </div>
       <div className="flex flex-col md:flex-row gap-8">
         {/* Sidebar: Watchlist (desktop only) */}
         <aside className="hidden md:block md:w-80 flex-shrink-0">

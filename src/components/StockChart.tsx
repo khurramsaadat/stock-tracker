@@ -71,7 +71,7 @@ export default function StockChart({ history, loading, error }: StockChartProps)
   };
   return (
     <div className="bg-neutral-900 rounded-lg p-4 mt-6 shadow" aria-label="Stock price chart" role="region">
-      <Line data={data} options={options} height={300} fallbackContent={<span>Chart unavailable. Data: {JSON.stringify(data)}</span>} />
+      <Line data={data} options={options} height={150} fallbackContent={<span>Chart unavailable. Data: {JSON.stringify(data)}</span>} />
     </div>
   );
 } 
